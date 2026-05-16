@@ -1,0 +1,36 @@
+{
+  "name": "GxTunnel-Codespace",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": false
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest"
+    }
+  },
+  "postStartCommand": "bash ./gxtunnel.sh --silent-start",
+  "postAttachCommand": "bash ./gxtunnel.sh",
+  "portsAttributes": {
+    "443": {
+      "label": "gxtunnel-vless",
+      "protocol": "https",
+      "onAutoForward": "silent",
+      "visibility": "public"
+    }
+  },
+  "forwardPorts": [443],
+  "hostRequirements": {
+    "cpus": 2
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}
